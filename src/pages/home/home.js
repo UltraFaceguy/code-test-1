@@ -15,9 +15,21 @@ let home = `
     <div class="intro-area">
         <div class="full-width">
             <div class="glider">
-                <div><img class="glider-image" src="../../../public/img_1.jpg" alt="img1"></div>
-                <div><img class="glider-image" src="../../../public/img_2.jpg" alt="img2"></div>
-                <div><img class="glider-image" src="../../../public/img_3.jpg" alt="img3"></div>
+                <div class="glider-panel">
+                    <img class="glider-image" src="../../../public/img_1.jpg" alt="img1">
+                    <div class="glider-title">Find Businesses Near You</div>
+                    <div class="glider-subtitle">Finally, a better solution than Google or talking to people</div>
+                </div>
+                <div class="glider-panel">
+                    <img class="glider-image" src="../../../public/img_2.jpg" alt="img2">
+                    <div class="glider-title">Premium Quality ZIP Codes</div>
+                    <div class="glider-subtitle">Accept no substitutes. Our ZIP codes are made from top of the shelf numerals like "3", "7", and even the coveted "2"</div>
+                </div>
+                <div class="glider-panel">
+                    <img class="glider-image" src="../../../public/img_3.jpg" alt="img3">
+                    <div class="glider-title">Find More Places To Love</div>
+                    <div class="glider-subtitle">Our patented random business generation software guarantees you'll find somewhere you've never been before - because it doesn't exist</div>
+                </div>
             </div>
         </div>
     </div>
@@ -57,5 +69,5 @@ function autoScroll() {
     if (currentSlide >= slides) {
         currentSlide = 0;
     }
-    gliderChangeTask = setTimeout(autoScroll, 7000)
+    gliderChangeTask = setTimeout(autoScroll, 10000)
 }

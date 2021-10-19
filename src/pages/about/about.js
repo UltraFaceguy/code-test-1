@@ -12,7 +12,7 @@ let about = `
             </nav>
         </div>
     </div>
-    <h1>I am About Page.</h1>
+    <h1>Yup, it's a route</h1>
 `
 
 let setupAbout = function () {
