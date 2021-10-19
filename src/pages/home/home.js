@@ -23,26 +23,32 @@ let home = `
     </div>
 `
 
-let glider;
 let slides;
 let currentSlide = 0;
+let glider;
+let gliderChangeTask;
 
 let setupHome = function () {
     const gliderElement = document.querySelector('.glider');
     slides = gliderElement.childElementCount;
     glider = new Glider(gliderElement, {
         slidesToShow: 1,
-        dots: '#dots',
-        draggable: false,
-        rewind: true,
-        scrollLock: true,
-        duration: 0.6,
-        arrows: {
-            prev: '.glider-prev',
-            next: '.glider-next'
-        }
+            dots: '#dots',
+            draggable: false,
+            rewind: true,
+            scrollLock: true,
+            duration: 0.6,
+            arrows: {
+                prev: '.glider-prev',
+                next: '.glider-next'
+            }
     });
+    currentSlide = 0;
+    if (gliderChangeTask) {
+        clearTimeout(gliderChangeTask);
+    }
     autoScroll();
+
 }
 
 function autoScroll() {
@@ -51,5 +57,5 @@ function autoScroll() {
     if (currentSlide >= slides) {
         currentSlide = 0;
     }
-    setTimeout(autoScroll, 7000)
+    gliderChangeTask = setTimeout(autoScroll, 7000)
 }
