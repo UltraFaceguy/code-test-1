@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="pages/home/style.css">
+<link rel="stylesheet" href="pages/about/style.css">
+<link rel="stylesheet" href="pages/search/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+<link href="https://cdn.jsdelivr.net/gh/teddy95/starry@5/dist/starry.min.css" type="text/css" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <title>Stuff Near Me!</title>
+    <script src="pages/home/home.js"></script>
+    <script src="pages/search/search.js"></script>
+    <script src="pages/about/about.js"></script>
+</head>
+<body>
+<!-- site-navbar start -->
+<div class="navbar-background">
+    <div class="full-width">
+        <nav class="navbar-elements">
+            <!-- site logo -->
+            <a class="site-logo" href="#" onclick="onNavigate('/'); return false;">My ZIP Finder</a>
+
+            <!-- site menu/nav -->
+            <ul class="navbar-options">
+                <li class="navbar-item"><a href="#" onclick="onNavigate('/'); return false;">Home</a></li>
+                <li class="navbar-item"><a href="#" onclick="onNavigate('/about'); return false;">About</a></li>
+                <li class="navbar-item"><a href="#" onclick="onNavigate('/search'); return false;">Business Locator</a></li>
+            </ul>
+
+            <!-- nav-toggler for mobile version only -->
+            <button class="nav-toggler">
+                <span></span>
+            </button>
+        </nav>
+    </div>
+</div><!-- navbar-area end -->
+
+<div id="root"></div>
+
+<script src="app.js"></script>
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&v=weekly&channel=2"
+        async
+></script>
+<script src="simple-scrollbar.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/teddy95/starry@5/dist/starry.min.js" type="text/javascript" language="javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+</body>

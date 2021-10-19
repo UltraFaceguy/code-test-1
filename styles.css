@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.full-width {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.glider-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.navbar-background {
+    height: 60px;
+    padding-left: 60px;
+    padding-right: 60px;
+    background: rgb(37, 37, 37);
+    border-bottom: 2px solid #177ee1;
+}
+.navbar-elements {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a.site-logo {
+    min-width: 220px;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+}
+.navbar-elements ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+.navbar-elements ul li a {
+    color: #fff;
+    padding: 20px;
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.navbar-elementsul li a:hover {
+    background: rgba(255,255,255,.1);
+}
+/* navbar regular css end */
+
+
+/* nav-toggler css start */
+.nav-toggler {
+    border: 3px solid #fff;
+    padding: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    height: 39px;
+    display: none;
+}
+.nav-toggler span,
+.nav-toggler span:before,
+.nav-toggler span:after {
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+    display: block;
+    transition: .3s;
+}
+.nav-toggler span:before {
+    content: '';
+    transform: translateY(-9px);
+}
+.nav-toggler span:after {
+    content: '';
+    transform: translateY(6px);
+}
+.nav-toggler.toggler-open span {
+    background-color: transparent;
+}
+.nav-toggler.toggler-open span:before {
+    transform: translateY(0px) rotate(45deg);
+}
+.nav-toggler.toggler-open span:after {
+    transform: translateY(-3px) rotate(-45deg);
+}
+
+.infoWindow-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.infoWindow-image {
+    float: left;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    overflow: hidden;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* intro-area css start */
+.intro-area {
+    width: 100vw;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+.intro-area h2 {
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 50px;
+    margin-bottom: 25px;
+}
+.intro-area p {
+    font-size: 18px;
+}
+
+/* mobile breakpoint start */
+@media screen and (max-width: 767px) {
+    .full-width {
+        max-width: 720px;
+    }
+    /* navbar css for mobile start */
+    .nav-toggler{
+        display: block;
+    }
+    .site-navbar {
+        min-height: 60px;
+    }
+    .site-navbar ul {
+        position: absolute;
+        width: 100%;
+        height: calc(100vh - 60px);
+        left: 0;
+        top: 60px;
+        flex-direction: column;
+        align-items: center;
+        border-top: 1px solid #444;
+        background-color: rgba(0,0,0,.75);
+        max-height: 0;
+        overflow: hidden;
+        transition: .3s;
+    }
+    .site-navbar ul li {
+        width: 100%;
+        text-align: center;
+    }
+    .site-navbar ul li a {
+        padding: 25px;
+    }
+    .site-navbar ul li a:hover {
+        background-color: rgba(255,255,255,.1);
+    }
+    .site-navbar ul.open {
+        max-height: 100vh;
+        overflow: visible;
+    }
+    .intro-area h2 {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+}
+
+.ss-wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    float: left;
+}
+
+.ss-content {
+    height: 100%;
+    width: calc(100% + 18px);
+    padding: 0 0 0 0;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.ss-content.rtl {
+    width: calc(100% + 18px);
+    right: auto;
+}
+
+.ss-scroll {
+    position: relative;
+    background: rgba(0, 0, 0, 0.1);
+    width: 9px;
+    border-radius: 4px;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s linear;
+}
+
+.ss-hidden {
+    display: none;
+}
+
+.ss-container:hover .ss-scroll,
+.ss-container:active .ss-scroll {
+    opacity: 1;
+}
+
+.ss-grabbed {
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
