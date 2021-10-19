@@ -17,8 +17,15 @@ let search = `
         <div class="mapSidebar">
             <div class="mapSidebar-top">
                 <div class="mapSidebar-title">Enter ZIP Code</div>
-                <input class="mapSidebar-input" id="zip-input" type='text' onkeydown='validateInputNumericOnly(event)' maxlength="5">
-                <button class="mapSidebar-button" onclick="submitZip()">Go</button>
+                <input
+                    class="mapSidebar-input"
+                    id="zip-input"
+                    type='text'
+                    onkeydown=validateInputNumericOnly(event)
+                    onkeyup=enableIfValid(event)
+                    maxlength="5"
+                >
+                <button disabled id="zip-button" class="mapSidebar-button" onclick="submitZip()">Go</button>
             </div>
             <div class="mapSidebar-results"/>
         </div>
@@ -27,6 +34,7 @@ let search = `
 
 let map;
 let markers = [];
+let submitButton;
 let randomImages = [
     "public/business_1.jpg",
     "public/business_2.jpg",
@@ -66,6 +74,7 @@ let setupSearch = function () {
 }
 
 function initMaps() {
+    submitButton = document.getElementById("zip-button");
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 36.852924, lng: -75.977982 },
         zoom: 14,
@@ -168,7 +177,19 @@ function getLatLongFromZip(zip, recenterCallback) {
     fetch('https://api.promaptools.com/service/us/zip-lat-lng/get/?zip='+ zip + '&key=17o8dysaCDrgv1c').then((response) => {
         return response.json();
     }).then((json) => {
-        recenterCallback(json.output[0].latitude, json.output[0].longitude);
+        if (json.msg && json.msg === "No results found") {
+            deleteMarkers();
+            const results = document.querySelector('.mapSidebar-results');
+            while (results.firstChild) {
+                results.removeChild(results.firstChild);
+            }
+            const noResultsPanel = document.createElement('div');
+            let result = `<div>Nothing found for that ZIP!</div>`;
+            noResultsPanel.innerHTML += result;
+            results.appendChild(noResultsPanel);
+        } else {
+            recenterCallback(json.output[0].latitude, json.output[0].longitude);
+        }
     });
 }
 
@@ -264,4 +285,8 @@ function validateInputNumericOnly(event) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
+}
+
+function enableIfValid(event) {
+    submitButton.disabled = event.path[0].value.length !== 5;
 }
