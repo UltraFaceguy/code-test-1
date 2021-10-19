@@ -1,2 +1,5 @@
 # code-test-1
-A code test
+To view project:
+- Navigate to root in command line
+- run `npm i -g live-server`
+- run `live-server`
