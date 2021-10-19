@@ -58,6 +58,7 @@ let randomDescriptions = [
     "Blazing fast service that won't break the bank! Come visit anytime!",
     "Wow! What a business! Recommended by 4/5 dentists.",
     "Low low prices, and an even lower quality!",
+    "We proudly have enough reviews that you can't be sure if your rating even actually updates the average stars!",
     "Our prices are so low, we lose money on every sale! But don't worry, we'll make up for it with volume."
 ];
 
@@ -94,7 +95,7 @@ function addMarker(position) {
     marker.imgUrl = randomImages[Math.round(Math.random() * (randomImages.length - 1))];
     marker.rating = Math.round((1 + Math.random() * 4) * 10) / 10;
     marker.desc = randomDescriptions[Math.round(Math.random() * (randomDescriptions.length - 1))]
-    marker.reviews = Math.round(Math.random() * 999)
+    marker.reviews = 540 + Math.round(Math.random() * 450)
     marker.reviewed = false;
     marker.distance = Math.round(haversine_distance(map.center, position) * 10) / 10;
     const contentString =
@@ -232,8 +233,6 @@ function updateSidebar() {
     markers.sort(compareMarkerDistance);
     markers.forEach(function (item, index) {
         const newEl = document.createElement('div');
-        const ratingElement = document.createElement('div');
-        ratingElement.id = "star-rating";
         newEl.className = "sidebar-result"
         newEl.id = "sidebar-result-" + index;
         newEl.onclick = function () {
@@ -244,17 +243,35 @@ function updateSidebar() {
                 shouldFocus: true,
             });
         }
-        let result = `
-            <div class="poi-title">`+ item.title +`<span class="poi-distance"> `+ item.distance + `mi Away</span></div>
-            <div class="poi-rating">` + item.rating + `★</div><span>  (`+ item.reviews +`) Reviews</span>
-            <div class="poi-details">` + item.desc + `</div>
-        `
-        newEl.innerHTML += result;
-        newEl.appendChild(ratingElement);
-        new Starry(ratingElement);
+        generateSidebarPanelInfo(item, newEl);
         container.appendChild(newEl);
     });
     SimpleScrollbar.initAll();
+}
+
+function generateSidebarPanelInfo(marker, element) {
+    const ratingElement = element.querySelector("#star-rating");
+    element.innerHTML = `
+        <div class="poi-title">` + marker.title + `<span class="poi-distance"> ` + marker.distance + `mi Away</span></div>
+        <div class="poi-rating">` + marker.rating + `★</div><span>  (` + marker.reviews + `) Reviews</span>
+        <div class="poi-details">` + marker.desc + `</div>
+    `;
+    if (ratingElement != null) {
+        element.appendChild(ratingElement);
+    } else {
+        const ratingElement = document.createElement('div');
+        ratingElement.id = "star-rating";
+        element.appendChild(ratingElement);
+        new Starry(ratingElement, {
+            onRate: function (rating) {
+                if (!marker.reviewed) {
+                    marker.reviewed = true;
+                    marker.reviews++;
+                }
+                generateSidebarPanelInfo(marker, element);
+            }
+        });
+    }
 }
 
 function compareMarkerDistance(a, b) {
