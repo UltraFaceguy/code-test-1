@@ -48,10 +48,9 @@ const myStyles = [{
     ]
 }];
 
-// Yay race conditions. Will app.js load in time? TODO: not this
-setTimeout(function () {
-    initMaps()
-}, 1500);
+let setupSearch = function () {
+    initMaps();
+}
 
 function initMaps() {
     map = new google.maps.Map(document.getElementById("map"), {

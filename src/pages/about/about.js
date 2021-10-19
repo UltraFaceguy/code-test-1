@@ -1,3 +1,7 @@
 let about = `
-<h1>I am About Page.</h1>
+    <h1>I am About Page.</h1>
 `
+
+let setupAbout = function () {
+
+}

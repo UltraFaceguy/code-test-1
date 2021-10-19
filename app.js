@@ -1,7 +1,7 @@
 const routes = {
-    '/' : home,
-    '/search' : search,
-    '/about' : about
+    '/' : { html: home, setup: () => setupHome() },
+    '/search' : { html: search, setup: () => setupSearch() },
+    '/about' : { html: about, setup: () => setupAbout() },
 };
 
 const rootDiv = document.getElementById('root');
@@ -13,7 +13,8 @@ const onNavigate = (pathname) => {
         pathname,
         window.location.origin + pathname
     )
-    rootDiv.innerHTML = routes[pathname]
+    rootDiv.innerHTML = routes[pathname].html
+    routes[pathname].setup();
 }
 
 window.onpopstate = () => {
