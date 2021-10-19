@@ -15,13 +15,13 @@ let search = `
 let map;
 let markers = [];
 let randomImages = [
-    "assets/business_1.jpg",
-    "assets/business_2.jpg",
-    "assets/business_3.jpg",
-    "assets/business_4.jpg",
-    "assets/business_5.jpg",
-    "assets/business_6.jpg",
-    "assets/business_7.jpg"
+    "public/business_1.jpg",
+    "public/business_2.jpg",
+    "public/business_3.jpg",
+    "public/business_4.jpg",
+    "public/business_5.jpg",
+    "public/business_6.jpg",
+    "public/business_7.jpg"
 ];
 let randomNames = [
     "Alice's Restaurant",

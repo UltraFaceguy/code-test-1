@@ -2,9 +2,9 @@ let home = `
 <div class="intro-area">
     <div class="full-width">
         <div class="glider">
-            <div><img class="glider-image" src="../../assets/img_1.jpg" alt="img1"></div>
-            <div><img class="glider-image" src="../../assets/img_2.jpg" alt="img2"></div>
-            <div><img class="glider-image" src="../../assets/img_3.jpg" alt="img3"></div>
+            <div><img class="glider-image" src="../../../public/img_1.jpg" alt="img1"></div>
+            <div><img class="glider-image" src="../../../public/img_2.jpg" alt="img2"></div>
+            <div><img class="glider-image" src="../../../public/img_3.jpg" alt="img3"></div>
         </div>
     </div>
 </div>
