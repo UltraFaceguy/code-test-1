@@ -288,5 +288,5 @@ function validateInputNumericOnly(event) {
 }
 
 function enableIfValid(event) {
-    submitButton.disabled = event.path[0].value.length !== 5;
+    submitButton.disabled = event.target.value.length !== 5;
 }
