@@ -247,6 +247,9 @@ function validateInputNumericOnly(event) {
         key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode(key);
     }
+    if (key === "\b") {
+        return
+    }
     const regex = /[0-9]|\./;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
