@@ -18,6 +18,11 @@
 
 /* TODO: not just -140px for the navbar and the search box.... */
 .mapSidebar-results {
+    padding: 0;
+    margin: 0;
+}
+
+.mapSidebar-container {
     height: calc(100vh - 140px);
 }
 

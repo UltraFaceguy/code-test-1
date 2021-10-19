@@ -195,9 +195,18 @@ function populateMarkers() {
 }
 
 function updateSidebar() {
-    const sidebarResults = document.querySelector('.mapSidebar-results');
-    while (sidebarResults.firstChild) {
-        sidebarResults.removeChild(sidebarResults.firstChild);
+    // Do this nonsense because the scrollbar lib doesn't
+    // support dynamic adding of dom elements... TODO: Get new scroll lib
+    const results = document.querySelector('.mapSidebar-results');
+    while (results.firstChild) {
+        results.removeChild(results.firstChild);
+    }
+    const container = document.createElement('div');
+    container.className = "mapSidebar-container";
+    container.setAttribute('ss-container', true);
+    results.appendChild(container);
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
     }
     markers.sort(compareMarkerDistance);
     markers.forEach(function (item, index) {
@@ -222,9 +231,9 @@ function updateSidebar() {
         newEl.innerHTML += result;
         newEl.appendChild(ratingElement);
         new Starry(ratingElement);
-        sidebarResults.appendChild(newEl);
+        container.appendChild(newEl);
     });
-    SimpleScrollbar.initEl(sidebarResults);
+    SimpleScrollbar.initAll();
 }
 
 function compareMarkerDistance(a, b) {
