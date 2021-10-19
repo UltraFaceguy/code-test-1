@@ -103,7 +103,9 @@ function addMarker(position) {
     const infoWindow = new google.maps.InfoWindow({
         content: contentString,
     });
+    marker.infoWindow = infoWindow;
     marker.addListener("click", () => {
+        closeOtherInfoWindows();
         infoWindow.open({
             anchor: marker,
             map,
@@ -133,6 +135,12 @@ function hideMarkers() {
     setMapOnAll(null);
 }
 
+function closeOtherInfoWindows() {
+    markers.forEach(function (item, index) {
+        item.infoWindow.close();
+    });
+}
+
 function showMarkers() {
     setMapOnAll(map);
 }
@@ -143,6 +151,7 @@ function deleteMarkers() {
 }
 
 // https://cloud.google.com/blog/products/maps-platform/how-calculate-distances-map-maps-javascript-api
+// This doesn't... seem to be correct though? TODO: Verify distances are correct
 function haversine_distance(mk1, mk2) {
     const R = 3958.8; // Radius of the Earth in miles
     const rlat1 = mk1.lat() * (Math.PI / 180); // Convert degrees to radians
@@ -197,6 +206,14 @@ function updateSidebar() {
         ratingElement.id = "star-rating";
         newEl.className = "sidebar-result"
         newEl.id = "sidebar-result-" + index;
+        newEl.onclick = function () {
+            closeOtherInfoWindows();
+            item.infoWindow.open({
+                anchor: item,
+                map,
+                shouldFocus: true,
+            });
+        }
         let result = `
             <div class="poi-title">`+ item.title +`<span class="poi-distance"> `+ item.distance + `mi Away</span></div>
             <div class="poi-rating">` + item.rating + `★</div><span>  (`+ item.reviews +`) Reviews</span>
